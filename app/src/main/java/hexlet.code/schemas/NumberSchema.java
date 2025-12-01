@@ -16,7 +16,7 @@ public class NumberSchema extends BaseSchema<Integer> {
      * @return NumberSchema.
      */
     public NumberSchema positive() {
-        this.addRule("positive", v -> v == null || v > 0);
+        this.addRule("positive", v -> v > 0, true);
 
         return this;
     }
@@ -27,7 +27,7 @@ public class NumberSchema extends BaseSchema<Integer> {
      * @return NumberSchema.
      */
     public NumberSchema range(final Integer min, final Integer max) {
-        this.addRule("range", v -> v >= min && v <= max);
+        this.addRule("range", v -> v >= min && v <= max, false);
 
         return this;
     }

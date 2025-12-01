@@ -15,7 +15,7 @@ public final class StringSchema extends BaseSchema<String> {
      * @return StringSchema.
      */
     public StringSchema minLength(final int length) {
-        this.addRule("minLength", v -> v.length() >= length);
+        this.addRule("minLength", v -> v.length() >= length, false);
 
         return this;
     }
@@ -25,7 +25,7 @@ public final class StringSchema extends BaseSchema<String> {
      * @return StringSchema.
      */
     public StringSchema contains(final String subString) {
-        this.addRule("minLength", v -> v.contains(subString));
+        this.addRule("minLength", v -> v.contains(subString), false);
 
         return this;
     }

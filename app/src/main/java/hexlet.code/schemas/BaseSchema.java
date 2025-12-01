@@ -2,6 +2,7 @@ package hexlet.code.schemas;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 import java.util.function.Predicate;
 
 public class BaseSchema<T> {
@@ -32,5 +33,19 @@ public class BaseSchema<T> {
      */
     protected void addRule(final String ruleName, final Predicate<T> rule) {
         rules.put(ruleName, rule);
+    }
+
+    /**
+     * Adds a validation rule that automatically handles null values.
+     * The rule will only be applied if the value is present.
+     *
+     * @param ruleName the name of the rule to be added.
+     * @param rule     the predicate that defines the rule logic for non-null values.
+     * @param defaultIfNull the value to return if the validated value is null.
+     */
+    protected void addRule(final String ruleName, final Predicate<T> rule, final boolean defaultIfNull) {
+        this.addRule(ruleName, v -> Optional.ofNullable(v)
+                .map(rule::test)
+                .orElse(defaultIfNull));
     }
 }

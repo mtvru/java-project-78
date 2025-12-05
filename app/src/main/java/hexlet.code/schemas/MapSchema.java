@@ -22,4 +22,22 @@ public class MapSchema extends BaseSchema<Map<?, ?>> {
 
         return this;
     }
+
+    public <T> MapSchema shape(final Map<String, BaseSchema<T>> schemas) {
+        this.addRule("shape", v -> {
+            for (Map.Entry<String, BaseSchema<T>> entry : schemas.entrySet()) {
+                String key = entry.getKey();
+                BaseSchema<T> schema = entry.getValue();
+                T value = (T) v.get(key);
+
+                if (!schema.isValid(value)) {
+                    return false;
+                }
+            }
+
+            return true;
+        }, true);
+
+        return this;
+    }
 }

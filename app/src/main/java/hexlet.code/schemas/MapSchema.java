@@ -23,7 +23,7 @@ public class MapSchema extends BaseSchema<Map<?, ?>> {
         return this;
     }
 
-    public final  <T> void shape(final Map<String, BaseSchema<T>> schemas) {
+    public final <T> void shape(final Map<String, BaseSchema<T>> schemas) {
         this.addRule("shape", v -> {
             for (Map.Entry<String, BaseSchema<T>> entry : schemas.entrySet()) {
                 String key = entry.getKey();

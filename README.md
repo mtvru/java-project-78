@@ -20,5 +20,3 @@ Then execute:
 ```bash
 make -C app run-dist
 ```
-
-### Short video demo of the app:

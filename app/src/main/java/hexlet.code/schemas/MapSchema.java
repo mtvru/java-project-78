@@ -23,7 +23,14 @@ public class MapSchema extends BaseSchema<Map<?, ?>> {
         return this;
     }
 
-    public final <T> void shape(final Map<String, BaseSchema<T>> schemas) {
+    /**
+     * @param schemas a map where keys correspond to keys in the validated map,
+     *                and values are schemas used to validate the corresponding
+     *                map values.
+     * @param <T> the expected type of values.
+     * @return MapSchema.
+     */
+    public <T> MapSchema shape(final Map<String, BaseSchema<T>> schemas) {
         this.addRule("shape", v -> {
             for (Map.Entry<String, BaseSchema<T>> entry : schemas.entrySet()) {
                 String key = entry.getKey();
@@ -37,5 +44,7 @@ public class MapSchema extends BaseSchema<Map<?, ?>> {
 
             return true;
         }, true);
+
+        return this;
     }
 }

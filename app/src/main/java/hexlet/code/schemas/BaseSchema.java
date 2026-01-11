@@ -39,8 +39,9 @@ public class BaseSchema<T> {
      * Adds a validation rule that automatically handles null values.
      * The rule will only be applied if the value is present.
      *
-     * @param ruleName the name of the rule to be added.
-     * @param rule     the predicate that defines the rule logic for non-null values.
+     * @param ruleName      the name of the rule to be added.
+     * @param rule          the predicate that defines the rule logic for non-null
+     *                      values.
      * @param defaultIfNull the value to return if the validated value is null.
      */
     protected void addRule(final String ruleName, final Predicate<T> rule, final boolean defaultIfNull) {

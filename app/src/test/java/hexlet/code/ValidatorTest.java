@@ -96,8 +96,8 @@ public class ValidatorTest {
         assertFalse(schema.isValid(human2));
 
         Map<String, Integer> human3 = new HashMap<>();
-        human2.put("age", numberMinus5);
-        human2.put("height", number174);
+        human3.put("age", numberMinus5);
+        human3.put("height", number174);
 
         assertFalse(schema.isValid(human3));
     }

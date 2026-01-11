@@ -27,7 +27,7 @@ public class MapSchema extends BaseSchema<Map<?, ?>> {
      * @param schemas a map where keys correspond to keys in the validated map,
      *                and values are schemas used to validate the corresponding
      *                map values.
-     * @param <T> the expected type of values.
+     * @param <T>     the expected type of values.
      * @return MapSchema.
      */
     public <T> MapSchema shape(final Map<String, BaseSchema<T>> schemas) {
@@ -35,9 +35,13 @@ public class MapSchema extends BaseSchema<Map<?, ?>> {
             for (Map.Entry<String, BaseSchema<T>> entry : schemas.entrySet()) {
                 String key = entry.getKey();
                 BaseSchema<T> schema = entry.getValue();
-                T value = (T) v.get(key);
-
-                if (!schema.isValid(value)) {
+                try {
+                    @SuppressWarnings("unchecked")
+                    T value = (T) v.get(key);
+                    if (!schema.isValid(value)) {
+                        return false;
+                    }
+                } catch (ClassCastException e) {
                     return false;
                 }
             }

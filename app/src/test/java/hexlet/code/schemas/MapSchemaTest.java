@@ -1,5 +1,6 @@
 package hexlet.code.schemas;
 
+import hexlet.code.Validator;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashMap;
@@ -41,6 +42,22 @@ public class MapSchemaTest {
         Map<String, String> data = new HashMap<>();
         data.put("key1", "value1");
         schema.sizeof(2);
+
+        assertFalse(schema.isValid(data));
+    }
+
+    @Test
+    void testShapeWithWrongType() {
+        Validator v = new Validator();
+        MapSchema schema = v.map();
+
+        Map<String, BaseSchema<String>> shape = new HashMap<>();
+        shape.put("name", v.string().required());
+
+        schema.shape(shape);
+
+        Map<String, Object> data = new HashMap<>();
+        data.put("name", 123);
 
         assertFalse(schema.isValid(data));
     }

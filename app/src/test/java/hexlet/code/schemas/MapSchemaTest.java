@@ -72,7 +72,8 @@ public class MapSchemaTest {
         schema.shape(shape);
 
         Map<String, Object> data = new HashMap<>();
-        data.put("name", 123);
+        final int number123 = 123;
+        data.put("name", number123);
 
         assertFalse(schema.isValid(data));
     }

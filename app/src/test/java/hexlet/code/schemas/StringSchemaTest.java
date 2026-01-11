@@ -20,7 +20,8 @@ public class StringSchemaTest {
     @Test
     void testMinLength() {
         StringSchema schema = new StringSchema();
-        schema.minLength(5);
+        final int minLength5 = 5;
+        schema.minLength(minLength5);
 
         assertTrue(schema.isValid("hexlet"));
         assertFalse(schema.isValid("test"));
@@ -42,8 +43,9 @@ public class StringSchemaTest {
     @Test
     void testSearchWithEverything() {
         StringSchema schema = new StringSchema();
+        final int minLength5 = 5;
         schema.required();
-        schema.minLength(5);
+        schema.minLength(minLength5);
         schema.contains("fox");
 
         assertTrue(schema.isValid("what does the fox say"));

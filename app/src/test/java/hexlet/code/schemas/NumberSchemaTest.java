@@ -11,9 +11,10 @@ public class NumberSchemaTest {
         NumberSchema schema = new NumberSchema();
         assertTrue(schema.isValid(null));
 
+        final int ten = 10;
         schema.required();
         assertFalse(schema.isValid(null));
-        assertTrue(schema.isValid(10));
+        assertTrue(schema.isValid(ten));
     }
 
     @Test
@@ -21,19 +22,27 @@ public class NumberSchemaTest {
         NumberSchema schema = new NumberSchema();
         schema.positive();
 
-        assertTrue(schema.isValid(10));
-        assertFalse(schema.isValid(-10));
+        final int ten = 10;
+        final int minusTen = -10;
+
+        assertTrue(schema.isValid(ten));
+        assertFalse(schema.isValid(minusTen));
         assertFalse(schema.isValid(0));
     }
 
     @Test
     void testRange() {
         NumberSchema schema = new NumberSchema();
-        schema.range(5, 10);
+        final int five = 5;
+        final int ten = 10;
+        final int four = 4;
+        final int eleven = 11;
 
-        assertTrue(schema.isValid(5));
-        assertTrue(schema.isValid(10));
-        assertFalse(schema.isValid(4));
-        assertFalse(schema.isValid(11));
+        schema.range(five, ten);
+
+        assertTrue(schema.isValid(five));
+        assertTrue(schema.isValid(ten));
+        assertFalse(schema.isValid(four));
+        assertFalse(schema.isValid(eleven));
     }
 }
